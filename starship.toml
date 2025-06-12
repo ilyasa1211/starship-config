@@ -1,0 +1,113 @@
+add_newline = true
+
+format = """
+[](#fce7f3)$username[@](bg:#fce7f3 fg:#1e1e2e)$hostname[](#fce7f3)\
+[](#dbeafe)$directory[](#dbeafe)\
+$git_branch$git_status\
+$kubernetes$shell$nodejs$python$rust$docker_context$cmd_duration
+$time
+$character
+"""
+
+# USER & HOSTNAME
+
+[username]
+style_user = "bg:#fce7f3 fg:#1e1e2e"
+style_root = "bg:#fecaca fg:#1e1e2e"
+format = "[  $user ]($style)"
+show_always = true
+
+[hostname]
+style = "bg:#fce7f3 fg:#1e1e2e"
+format = "[ $hostname ]($style)"
+ssh_only = false
+
+# DIRECTORY
+
+[directory]
+style = "bg:#dbeafe fg:#1e1e2e"
+format = "[   $path ]($style)"
+truncation_length = 3
+truncate_to_repo = true
+read_only = " "
+read_only_style = "fg:#fca5a5"
+
+# GIT
+
+[git_branch]
+symbol = "🌿"
+style = "bg:#e9d5ff fg:#1e1e2e"
+format = ' [](#e9d5ff)[$symbol $branch]($style)[](#e9d5ff)'
+
+[git_status]
+style = "fg:#fca5a5"
+format = ' ([ $all_status$ahead_behind ]($style))'
+conflicted = "⚔ "
+ahead = "⇡${count}"
+behind = "⇣${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+untracked = " ${count}"
+stashed = "📦 "
+modified = "📝 ${count}"
+staged = "✔ ${count}"
+renamed = "➡ ${count}"
+deleted = "✘ ${count}"
+
+# LANGUAGES
+
+[nodejs]
+symbol = "🐱"
+format = '[ $symbol $version ](fg:#86efac)'  # Mint green cat
+
+[python]
+symbol = "🐍"
+format = '[ $symbol $version (\($virtualenv\)) ](fg:#fcd34d)'
+
+[rust]
+symbol = "🦀"
+format = '[ $symbol $version ](fg:#fca5a5)'  # Crab
+
+# DOCKER
+
+[docker_context]
+symbol = "🐳"
+format = '[ $symbol$context ](fg:#5eead4)'
+only_with_files = true
+detect_extensions = ["Dockerfile", "docker-compose.yml", "compose.yaml"]
+disabled = false
+
+# KUBERNETES
+
+[kubernetes]
+symbol = "☸️ "
+format = '[ $symbol$context(\($namespace\)) ](fg:#93c5fd)'
+disabled = false
+
+# SHELL
+
+[shell]
+format = '[  $indicator ](fg:#fbcfe8)'
+fish_indicator = "fish"
+bash_indicator = "bash"
+zsh_indicator = "zsh"
+disabled = false
+
+# CMD DURATION
+
+[cmd_duration]
+min_time = 1000
+format = '  [$duration](fg:#fde68a)'
+
+# CHARACTER
+
+[character]
+success_symbol = '[❯](bold fg:#86efac)'
+error_symbol = '[✗](bold fg:#fca5a5)'
+vimcmd_symbol = '[](bold fg:#fcd34d)'
+
+# TIME
+
+[time]
+disabled = false
+format = '[  $time ](fg:#a5f3fc)'
+time_format = "%H:%M:%S"
